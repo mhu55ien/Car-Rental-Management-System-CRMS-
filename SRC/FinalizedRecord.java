@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 /**
  * Represents a fully finalized booking record, incorporating payment and pickup details.
  */
@@ -6,6 +8,8 @@ public class FinalizedRecord extends ProcessedRecord {
     private PaymentDetails paymentDetails;
     /** The designated pickup details. */
     private PickupDetails pickupDetails;
+    /** The required deposit. */
+    private double depositRequired;
 
     /**
      * Constructs a new FinalizedRecord.
@@ -22,10 +26,11 @@ public class FinalizedRecord extends ProcessedRecord {
      * @param paymentDetails  the payment details structured object
      * @param pickupDetails   the pickup parameters
      */
-    public FinalizedRecord(Client client, Car car, Agent agent, String startDate, String endDate, double baseCost,
+    public FinalizedRecord(Client client, Car car, Agent agent, LocalDate startDate, LocalDate endDate, double baseCost,
                            InsuranceOption insuranceOption, Discount discount, double depositRequired,
                            PaymentDetails paymentDetails, PickupDetails pickupDetails) {
-        super(client, car, agent, startDate, endDate, baseCost, insuranceOption, discount, depositRequired);
+        super(client, car, agent, startDate, endDate, baseCost, insuranceOption, discount);
+        this.depositRequired = depositRequired;
         this.paymentDetails = paymentDetails;
         this.pickupDetails = pickupDetails;
     }
@@ -67,6 +72,24 @@ public class FinalizedRecord extends ProcessedRecord {
     }
 
     /**
+     * Gets the required deposit.
+     *
+     * @return the required deposit
+     */
+    public double getDepositRequired() {
+        return depositRequired;
+    }
+
+    /**
+     * Sets the required deposit.
+     *
+     * @param depositRequired the required deposit
+     */
+    public void setDepositRequired(double depositRequired) {
+        this.depositRequired = depositRequired;
+    }
+
+    /**
      * Returns a string representation of the finalized record.
      *
      * @return the string representation
@@ -77,12 +100,12 @@ public class FinalizedRecord extends ProcessedRecord {
                 "client=" + getClient() +
                 ", car=" + getCar() +
                 ", agent=" + getAgent() +
-                ", startDate='" + getStartDate() + '\'' +
-                ", endDate='" + getEndDate() + '\'' +
+                ", startDate=" + getStartDate() +
+                ", endDate=" + getEndDate() +
                 ", baseCost=" + getBaseCost() +
                 ", insuranceOption=" + getInsuranceOption() +
                 ", discount=" + getDiscount() +
-                ", depositRequired=" + getDepositRequired() +
+                ", depositRequired=" + depositRequired +
                 ", paymentDetails=" + paymentDetails +
                 ", pickupDetails=" + pickupDetails +
                 '}';

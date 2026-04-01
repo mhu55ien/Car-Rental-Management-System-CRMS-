@@ -1,79 +1,58 @@
 /**
- * Represents an extra insurance option added to a booking.
+ * Represents the insurance applied to a booking.
+ * Details the type of insurance and its additional extra cost.
  */
 public class InsuranceOption {
-    /** The specific type of insurance (e.g., standard, premium). */
-    private String insuranceType;
-    /** The added cost for this insurance option. */
-    private double insuranceCost;
-    /** The provider name for this specific package. */
-    private String provider;
+    /** The type of insurance (e.g., standard, premium). */
+    private String type;
+    /** The extra cost incurred by this insurance option. */
+    private double extraCost;
 
     /**
      * Constructs a new InsuranceOption.
      *
-     * @param insuranceType the type
-     * @param insuranceCost the cost
-     * @param provider      the provider
+     * @param type      the type of insurance
+     * @param extraCost the extra cost for this insurance
      */
-    public InsuranceOption(String insuranceType, double insuranceCost, String provider) {
-        this.insuranceType = insuranceType;
-        this.insuranceCost = insuranceCost;
-        this.provider = provider;
+    public InsuranceOption(String type, double extraCost) {
+        this.type = type;
+        this.extraCost = extraCost;
     }
 
     /**
-     * Gets the insurance type.
+     * Gets the type of insurance.
      *
      * @return the type
      */
-    public String getInsuranceType() {
-        return insuranceType;
+    public String getType() {
+        return type;
     }
 
     /**
-     * Sets the insurance type.
+     * Sets the type of insurance.
      *
-     * @param insuranceType the type
+     * @param type the new type
      */
-    public void setInsuranceType(String insuranceType) {
-        this.insuranceType = insuranceType;
+    public void setType(String type) {
+        this.type = type;
     }
 
     /**
-     * Gets the insurance cost.
+     * Gets the extra cost for the insurance.
      *
-     * @return the cost
+     * @return the extra cost
      */
-    public double getInsuranceCost() {
-        return insuranceCost;
+    public double getExtraCost() {
+        return extraCost;
     }
 
     /**
-     * Sets the insurance cost.
+     * Sets the extra cost for the insurance.
      *
-     * @param insuranceCost the cost
+     * @param extraCost the new extra cost
      */
-    public void setInsuranceCost(double insuranceCost) {
-        this.insuranceCost = insuranceCost;
-    }
-
-    /**
-     * Gets the provider name.
-     *
-     * @return the provider
-     */
-    public String getProvider() {
-        return provider;
-    }
-
-    /**
-     * Sets the provider name.
-     *
-     * @param provider the provider
-     */
-    public void setProvider(String provider) {
-        this.provider = provider;
+    public void setExtraCost(double extraCost) {
+        this.extraCost = extraCost;
     }
 
     /**
@@ -83,10 +62,9 @@ public class InsuranceOption {
      */
     @Override
     public String toString() {
-        return "InsuranceOption{" +
-                "insuranceType='" + insuranceType + '\'' +
-                ", insuranceCost=" + insuranceCost +
-                ", provider='" + provider + '\'' +
+        return "InsuranceOption {" +
+                "Type='" + type + '\'' +
+                ", ExtraCost=$" + String.format("%.2f", extraCost) +
                 '}';
     }
 }

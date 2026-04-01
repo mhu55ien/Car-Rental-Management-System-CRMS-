@@ -1,31 +1,34 @@
+import java.time.LocalDate;
+
 /**
- * Represents a base booking record in the system.
+ * Represents a base booking record in the Car Rental Management System (CRMS).
+ * Stores the initial booking details such as client, car, agent, dates, and base cost.
  */
 public class BookingRecord {
     /** The client who made the booking. */
     private Client client;
-    /** The car that is booked. */
+    /** The car that is requested for the booking. */
     private Car car;
-    /** The agent assisting with the booking. */
+    /** The agent handling the booking. */
     private Agent agent;
-    /** The formatted start date string. */
-    private String startDate;
-    /** The formatted end date string. */
-    private String endDate;
-    /** The calculated base cost of the rental. */
+    /** The start date of the rental period. */
+    private LocalDate startDate;
+    /** The end date of the rental period. */
+    private LocalDate endDate;
+    /** The initial base cost of the rental. */
     private double baseCost;
 
     /**
      * Constructs a new BookingRecord.
      *
      * @param client    the booking client
-     * @param car       the booked car
+     * @param car       the requested car
      * @param agent     the managing agent
-     * @param startDate the start date
-     * @param endDate   the end date
-     * @param baseCost  the accumulated base cost
+     * @param startDate the start date of the rental
+     * @param endDate   the end date of the rental
+     * @param baseCost  the base cost of the rental
      */
-    public BookingRecord(Client client, Car car, Agent agent, String startDate, String endDate, double baseCost) {
+    public BookingRecord(Client client, Car car, Agent agent, LocalDate startDate, LocalDate endDate, double baseCost) {
         this.client = client;
         this.car = car;
         this.agent = agent;
@@ -35,7 +38,7 @@ public class BookingRecord {
     }
 
     /**
-     * Gets the client.
+     * Gets the client making the booking.
      *
      * @return the client
      */
@@ -44,7 +47,7 @@ public class BookingRecord {
     }
 
     /**
-     * Sets the client.
+     * Sets the client making the booking.
      *
      * @param client the new client
      */
@@ -53,7 +56,7 @@ public class BookingRecord {
     }
 
     /**
-     * Gets the car.
+     * Gets the car requested for the booking.
      *
      * @return the car
      */
@@ -62,7 +65,7 @@ public class BookingRecord {
     }
 
     /**
-     * Sets the car.
+     * Sets the car requested for the booking.
      *
      * @param car the new car
      */
@@ -71,7 +74,7 @@ public class BookingRecord {
     }
 
     /**
-     * Gets the agent.
+     * Gets the agent handling the booking.
      *
      * @return the agent
      */
@@ -80,7 +83,7 @@ public class BookingRecord {
     }
 
     /**
-     * Sets the agent.
+     * Sets the agent handling the booking.
      *
      * @param agent the new agent
      */
@@ -89,43 +92,43 @@ public class BookingRecord {
     }
 
     /**
-     * Gets the start date string.
+     * Gets the start date of the rental period.
      *
      * @return the start date
      */
-    public String getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
     /**
-     * Sets the start date string.
+     * Sets the start date of the rental period.
      *
-     * @param startDate the start date
+     * @param startDate the new start date
      */
-    public void setStartDate(String startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
     /**
-     * Gets the end date string.
+     * Gets the end date of the rental period.
      *
      * @return the end date
      */
-    public String getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
     /**
-     * Sets the end date string.
+     * Sets the end date of the rental period.
      *
-     * @param endDate the end date
+     * @param endDate the new end date
      */
-    public void setEndDate(String endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
     /**
-     * Gets the base cost.
+     * Gets the initial base cost of the rental.
      *
      * @return the base cost
      */
@@ -134,28 +137,28 @@ public class BookingRecord {
     }
 
     /**
-     * Sets the base cost.
+     * Sets the initial base cost of the rental.
      *
-     * @param baseCost the base cost
+     * @param baseCost the new base cost
      */
     public void setBaseCost(double baseCost) {
         this.baseCost = baseCost;
     }
 
     /**
-     * Returns a string representation of the booking record.
+     * Returns a customized string representation of the booking record.
      *
      * @return the string representation
      */
     @Override
     public String toString() {
-        return "BookingRecord{" +
-                "client=" + client +
-                ", car=" + car +
-                ", agent=" + agent +
-                ", startDate='" + startDate + '\'' +
-                ", endDate='" + endDate + '\'' +
-                ", baseCost=" + baseCost +
+        return "BookingRecord {" +
+                "Client=" + (client != null ? client.getName() : "null") +
+                ", Car=" + (car != null ? car.getCarID() : "null") +
+                ", Agent=" + (agent != null ? agent.getName() : "null") +
+                ", StartDate=" + startDate +
+                ", EndDate=" + endDate +
+                ", BaseCost=$" + String.format("%.2f", baseCost) +
                 '}';
     }
 }

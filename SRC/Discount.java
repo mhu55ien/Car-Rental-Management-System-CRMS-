@@ -1,79 +1,80 @@
 /**
- * Represents a discount applicable to a rental booking.
+ * Documents any discounts applied to a booking.
+ * Specifies the discount type and the amount (or percentage) to be deducted.
  */
 public class Discount {
-    /** The type classification of the discount (e.g., loyalty, corporate). */
-    private String discountType;
-    /** The exact numeric amount or percentage that will be discounted. */
-    private double discountAmount;
-    /** A descriptive explanation of this discount. */
-    private String description;
+    /** The type of discount (e.g., loyalty, promotional, corporate). */
+    private String type;
+    /** The numeric value of the discount. */
+    private double amount;
+    /** Indicates whether the amount represents a percentage or a flat value. */
+    private boolean isPercentage;
 
     /**
      * Constructs a new Discount.
      *
-     * @param discountType   the discount type classification
-     * @param discountAmount the calculated reduction amount
-     * @param description    the string description
+     * @param type         the discount type
+     * @param amount       the discount amount or percentage
+     * @param isPercentage true if the amount is a percentage, false if flat value
      */
-    public Discount(String discountType, double discountAmount, String description) {
-        this.discountType = discountType;
-        this.discountAmount = discountAmount;
-        this.description = description;
+    public Discount(String type, double amount, boolean isPercentage) {
+        this.type = type;
+        this.amount = amount;
+        this.isPercentage = isPercentage;
     }
 
     /**
      * Gets the discount type.
      *
-     * @return the discount type
+     * @return the type
      */
-    public String getDiscountType() {
-        return discountType;
+    public String getType() {
+        return type;
     }
 
     /**
      * Sets the discount type.
      *
-     * @param discountType the discount type
+     * @param type the new type
      */
-    public void setDiscountType(String discountType) {
-        this.discountType = discountType;
+    public void setType(String type) {
+        this.type = type;
     }
 
     /**
-     * Gets the discount amount.
+     * Gets the numeric value of the discount.
      *
-     * @return the discount amount
+     * @return the amount
      */
-    public double getDiscountAmount() {
-        return discountAmount;
+    public double getAmount() {
+        return amount;
     }
 
     /**
-     * Sets the discount amount.
+     * Sets the numeric value of the discount.
      *
-     * @param discountAmount the discount amount
+     * @param amount the new amount
      */
-    public void setDiscountAmount(double discountAmount) {
-        this.discountAmount = discountAmount;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
     /**
-     * Gets the discount description.
+     * Checks if the discount is a percentage.
      *
-     * @return the descriptive string
+     * @return true if percentage, false otherwise
      */
-    public String getDescription() {
-        return description;
+    public boolean isPercentage() {
+        return isPercentage;
     }
 
     /**
-     * Sets the discount description.
+     * Sets whether the discount is a percentage.
      *
-     * @param description the descriptive string
+     * @param percentage true if percentage, false otherwise
      */
-    public void setDescription(String description) {
-        this.description = description;
+    public void setPercentage(boolean percentage) {
+        isPercentage = percentage;
     }
 
     /**
@@ -83,10 +84,10 @@ public class Discount {
      */
     @Override
     public String toString() {
-        return "Discount{" +
-                "discountType='" + discountType + '\'' +
-                ", discountAmount=" + discountAmount +
-                ", description='" + description + '\'' +
+        String amountStr = isPercentage ? amount + "%" : "$" + String.format("%.2f", amount);
+        return "Discount {" +
+                "Type='" + type + '\'' +
+                ", Value=" + amountStr +
                 '}';
     }
 }
