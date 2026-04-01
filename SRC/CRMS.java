@@ -11,7 +11,7 @@ public interface CRMS {
      * @param numOfAgents  the number of agents
      * @return an initialized RentalSystem
      */
-    public RentalSystem InitializeRentalSystem(int numOfClients, int numOfCars, int numOfAgents);
+    public RentalSystem initializeRentalSystem(int numOfClients, int numOfCars, int numOfAgents);
 
     /**
      * Handles the initial booking process.
@@ -21,7 +21,7 @@ public interface CRMS {
      * @param a   the agent handling the contract
      * @return a booking record connecting these three parties
      */
-    public BookingRecord Book(Client c, Car car, Agent a);
+    public BookingRecord book(Client c, Car car, Agent a);
 
     /**
      * Represents the processing phase of the booking.
@@ -29,7 +29,7 @@ public interface CRMS {
      * @param br the initial booking record
      * @return a processed record with applied insurance and discounts
      */
-    public ProcessedRecord Process(BookingRecord br);
+    public ProcessedRecord process(BookingRecord br);
 
     /**
      * Finalizes the rental process.
@@ -37,5 +37,5 @@ public interface CRMS {
      * @param pr the processed booking record
      * @return a finalized record confirming payment and pickup details
      */
-    public FinalizedRecord Finalize(ProcessedRecord pr);
+    public FinalizedRecord finalize(ProcessedRecord pr);
 }

@@ -8,8 +8,6 @@ public class PaymentDetails {
     private double totalRentalCost;
     /** The outstanding balance left to be paid. */
     private double outstandingBalance;
-    /** The current payment status (e.g., Pending, Completed). */
-    private String paymentStatus;
 
     /**
      * Constructs a new set of PaymentDetails.
@@ -17,13 +15,11 @@ public class PaymentDetails {
      * @param depositAmount      the deposit amount
      * @param totalRentalCost    the total overall cost
      * @param outstandingBalance the outstanding balance
-     * @param paymentStatus      the payment status string
      */
-    public PaymentDetails(double depositAmount, double totalRentalCost, double outstandingBalance, String paymentStatus) {
+    public PaymentDetails(double depositAmount, double totalRentalCost, double outstandingBalance) {
         this.depositAmount = depositAmount;
         this.totalRentalCost = totalRentalCost;
         this.outstandingBalance = outstandingBalance;
-        this.paymentStatus = paymentStatus;
     }
 
     /**
@@ -81,24 +77,6 @@ public class PaymentDetails {
     }
 
     /**
-     * Gets the payment status.
-     *
-     * @return the payment status
-     */
-    public String getPaymentStatus() {
-        return paymentStatus;
-    }
-
-    /**
-     * Sets the payment status.
-     *
-     * @param paymentStatus the payment status
-     */
-    public void setPaymentStatus(String paymentStatus) {
-        this.paymentStatus = paymentStatus;
-    }
-
-    /**
      * Returns a string representation of the payment details.
      *
      * @return the string representation
@@ -109,7 +87,6 @@ public class PaymentDetails {
                 "depositAmount=" + depositAmount +
                 ", totalRentalCost=" + totalRentalCost +
                 ", outstandingBalance=" + outstandingBalance +
-                ", paymentStatus='" + paymentStatus + '\'' +
                 '}';
     }
 }

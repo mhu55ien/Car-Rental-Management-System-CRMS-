@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 /**
  * Represents details regarding car pickup by the client.
  */
@@ -5,7 +7,7 @@ public class PickupDetails {
     /** The standard branch location where pickup occurs. */
     private String pickupBranch;
     /** The designated date of the pickup. */
-    private String pickupDate;
+    private LocalDate pickupDate;
     /** Any special instructions or preferences for pickup. */
     private String specialInstructions;
 
@@ -13,10 +15,10 @@ public class PickupDetails {
      * Constructs a new set of PickupDetails.
      *
      * @param pickupBranch        the designated pickup branch
-     * @param pickupDate          the designated pickup date string
+     * @param pickupDate          the designated pickup date
      * @param specialInstructions the special instructions
      */
-    public PickupDetails(String pickupBranch, String pickupDate, String specialInstructions) {
+    public PickupDetails(String pickupBranch, LocalDate pickupDate, String specialInstructions) {
         this.pickupBranch = pickupBranch;
         this.pickupDate = pickupDate;
         this.specialInstructions = specialInstructions;
@@ -41,20 +43,20 @@ public class PickupDetails {
     }
 
     /**
-     * Gets the pickup date string.
+     * Gets the pickup date.
      *
-     * @return the pickup date string
+     * @return the pickup date
      */
-    public String getPickupDate() {
+    public LocalDate getPickupDate() {
         return pickupDate;
     }
 
     /**
-     * Sets the pickup date string.
+     * Sets the pickup date.
      *
-     * @param pickupDate the pickup date string
+     * @param pickupDate the pickup date
      */
-    public void setPickupDate(String pickupDate) {
+    public void setPickupDate(LocalDate pickupDate) {
         this.pickupDate = pickupDate;
     }
 
@@ -85,7 +87,7 @@ public class PickupDetails {
     public String toString() {
         return "PickupDetails{" +
                 "pickupBranch='" + pickupBranch + '\'' +
-                ", pickupDate='" + pickupDate + '\'' +
+                ", pickupDate=" + pickupDate +
                 ", specialInstructions='" + specialInstructions + '\'' +
                 '}';
     }
