@@ -1,0 +1,2251 @@
+﻿// =============== Agent.java ===============
+
+/**
+ * Represents an Agent who works at a rental system branch, extending the abstract User model.
+ */
+public class Agent extends User {
+    /** The specific identifier for the agent. */
+    private String agentID;
+    /** The default branch location string for the agent. */
+    private String branchLocation;
+    /** The specific branch object the agent is assigned to. */
+    private Branch branch;
+    /** The specific working schedule of the agent. */
+    private Schedule schedule;
+
+    /**
+     * Constructs a new Agent.
+     *
+     * @param userID         the unique identifier
+     * @param name           the full name string
+     * @param contactDetails the basic contact details
+     * @param agentID        the secondary agent identifier
+     * @param branchLocation the branch location string
+     * @param branch         the specific branch object
+     * @param schedule       the specific schedule object
+     */
+    public Agent(String userID, String name, String contactDetails, String agentID, String branchLocation, Branch branch, Schedule schedule) {
+        super(userID, name, contactDetails);
+        this.agentID = agentID;
+        this.branchLocation = branchLocation;
+        this.branch = branch;
+        this.schedule = schedule;
+    }
+
+    /**
+     * Gets the specific agent ID.
+     *
+     * @return the agent ID
+     */
+    public String getAgentID() {
+        return agentID;
+    }
+
+    /**
+     * Sets the specific agent ID.
+     *
+     * @param agentID the new agent ID
+     */
+    public void setAgentID(String agentID) {
+        this.agentID = agentID;
+    }
+
+    /**
+     * Gets the basic branch location string.
+     *
+     * @return the branch location
+     */
+    public String getBranchLocation() {
+        return branchLocation;
+    }
+
+    /**
+     * Sets the basic branch location string.
+     *
+     * @param branchLocation the branch location
+     */
+    public void setBranchLocation(String branchLocation) {
+        this.branchLocation = branchLocation;
+    }
+
+    /**
+     * Gets the branch object.
+     *
+     * @return the branch object
+     */
+    public Branch getBranch() {
+        return branch;
+    }
+
+    /**
+     * Sets the branch object.
+     *
+     * @param branch the branch object
+     */
+    public void setBranch(Branch branch) {
+        this.branch = branch;
+    }
+
+    /**
+     * Gets the agent's schedule.
+     *
+     * @return the schedule
+     */
+    public Schedule getSchedule() {
+        return schedule;
+    }
+
+    /**
+     * Sets the agent's schedule.
+     *
+     * @param schedule the schedule
+     */
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
+    }
+
+    /**
+     * Returns a string representation of the agent.
+     *
+     * @return the string representation
+     */
+    @Override
+    public String toString() {
+        return "Agent{" +
+                "userID='" + getUserID() + '\'' +
+                ", name='" + getName() + '\'' +
+                ", contactDetails='" + getContactDetails() + '\'' +
+                ", agentID='" + agentID + '\'' +
+                ", branchLocation='" + branchLocation + '\'' +
+                ", branch=" + branch +
+                ", schedule=" + schedule +
+                '}';
+    }
+}
+
+
+// =============== BookingRecord.java ===============
+
+import java.time.LocalDate;
+
+/**
+ * Represents a base booking record in the Car Rental Management System (CRMS).
+ * Stores the initial booking details such as client, car, agent, dates, and base cost.
+ */
+public class BookingRecord {
+    /** The client who made the booking. */
+    private Client client;
+    /** The car that is requested for the booking. */
+    private Car car;
+    /** The agent handling the booking. */
+    private Agent agent;
+    /** The start date of the rental period. */
+    private LocalDate startDate;
+    /** The end date of the rental period. */
+    private LocalDate endDate;
+    /** The initial base cost of the rental. */
+    private double baseCost;
+
+    /**
+     * Constructs a new BookingRecord.
+     *
+     * @param client    the booking client
+     * @param car       the requested car
+     * @param agent     the managing agent
+     * @param startDate the start date of the rental
+     * @param endDate   the end date of the rental
+     * @param baseCost  the base cost of the rental
+     */
+    public BookingRecord(Client client, Car car, Agent agent, LocalDate startDate, LocalDate endDate, double baseCost) {
+        this.client = client;
+        this.car = car;
+        this.agent = agent;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.baseCost = baseCost;
+    }
+
+    /**
+     * Gets the client making the booking.
+     *
+     * @return the client
+     */
+    public Client getClient() {
+        return client;
+    }
+
+    /**
+     * Sets the client making the booking.
+     *
+     * @param client the new client
+     */
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    /**
+     * Gets the car requested for the booking.
+     *
+     * @return the car
+     */
+    public Car getCar() {
+        return car;
+    }
+
+    /**
+     * Sets the car requested for the booking.
+     *
+     * @param car the new car
+     */
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
+    /**
+     * Gets the agent handling the booking.
+     *
+     * @return the agent
+     */
+    public Agent getAgent() {
+        return agent;
+    }
+
+    /**
+     * Sets the agent handling the booking.
+     *
+     * @param agent the new agent
+     */
+    public void setAgent(Agent agent) {
+        this.agent = agent;
+    }
+
+    /**
+     * Gets the start date of the rental period.
+     *
+     * @return the start date
+     */
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    /**
+     * Sets the start date of the rental period.
+     *
+     * @param startDate the new start date
+     */
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    /**
+     * Gets the end date of the rental period.
+     *
+     * @return the end date
+     */
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    /**
+     * Sets the end date of the rental period.
+     *
+     * @param endDate the new end date
+     */
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    /**
+     * Gets the initial base cost of the rental.
+     *
+     * @return the base cost
+     */
+    public double getBaseCost() {
+        return baseCost;
+    }
+
+    /**
+     * Sets the initial base cost of the rental.
+     *
+     * @param baseCost the new base cost
+     */
+    public void setBaseCost(double baseCost) {
+        this.baseCost = baseCost;
+    }
+
+    /**
+     * Returns a customized string representation of the booking record.
+     *
+     * @return the string representation
+     */
+    @Override
+    public String toString() {
+        return "BookingRecord {" +
+                "Client=" + (client != null ? client.getName() : "null") +
+                ", Car=" + (car != null ? car.getCarID() : "null") +
+                ", Agent=" + (agent != null ? agent.getName() : "null") +
+                ", StartDate=" + startDate +
+                ", EndDate=" + endDate +
+                ", BaseCost=$" + String.format("%.2f", baseCost) +
+                '}';
+    }
+}
+
+
+// =============== Branch.java ===============
+
+/**
+ * Represents a rental branch location.
+ */
+public class Branch {
+    /** The unique branch identifier. */
+    private String branchID;
+    /** The name of the branch. */
+    private String branchName;
+    /** The location details or address of the branch. */
+    private String location;
+
+    /**
+     * Constructs a new Branch.
+     *
+     * @param branchID   the branch ID
+     * @param branchName the branch name
+     * @param location   the location
+     */
+    public Branch(String branchID, String branchName, String location) {
+        this.branchID = branchID;
+        this.branchName = branchName;
+        this.location = location;
+    }
+
+    /**
+     * Gets the branch ID.
+     *
+     * @return the branch ID
+     */
+    public String getBranchID() {
+        return branchID;
+    }
+
+    /**
+     * Sets the branch ID.
+     *
+     * @param branchID the branch ID
+     */
+    public void setBranchID(String branchID) {
+        this.branchID = branchID;
+    }
+
+    /**
+     * Gets the branch name.
+     *
+     * @return the branch name
+     */
+    public String getBranchName() {
+        return branchName;
+    }
+
+    /**
+     * Sets the branch name.
+     *
+     * @param branchName the branch name
+     */
+    public void setBranchName(String branchName) {
+        this.branchName = branchName;
+    }
+
+    /**
+     * Gets the branch location.
+     *
+     * @return the location
+     */
+    public String getLocation() {
+        return location;
+    }
+
+    /**
+     * Sets the branch location.
+     *
+     * @param location the location
+     */
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    /**
+     * Returns a string representation of the branch.
+     *
+     * @return the string representation
+     */
+    @Override
+    public String toString() {
+        return "Branch{" +
+                "branchID='" + branchID + '\'' +
+                ", branchName='" + branchName + '\'' +
+                ", location='" + location + '\'' +
+                '}';
+    }
+}
+
+
+// =============== Car.java ===============
+
+/**
+ * Represents a rental Car inside the management system.
+ */
+public class Car {
+    /** The unique identifier for the car. */
+    private String carID;
+    /** The brand or make of the car. */
+    private String brand;
+    /** The model or type classification. */
+    private String type;
+    /** The base daily rental rate for this car. */
+    private double dailyRate;
+    /** Indicates whether the car is currently available to rent. */
+    private boolean isAvailable;
+    /** The specific features of this car. */
+    private Features features;
+    /** The base insurance details applying to this car. */
+    private InsuranceDetails insurance;
+
+    /**
+     * Constructs a new Car.
+     *
+     * @param carID       the unique car ID
+     * @param brand       the car brand
+     * @param type        the car type
+     * @param dailyRate   the base daily rate
+     * @param isAvailable the availability flag
+     * @param features    the custom features
+     * @param insurance   the related insurance details
+     */
+    public Car(String carID, String brand, String type, double dailyRate, boolean isAvailable, Features features, InsuranceDetails insurance) {
+        this.carID = carID;
+        this.brand = brand;
+        this.type = type;
+        this.dailyRate = dailyRate;
+        this.isAvailable = isAvailable;
+        this.features = features;
+        this.insurance = insurance;
+    }
+
+    /**
+     * Gets the car ID.
+     *
+     * @return the car ID
+     */
+    public String getCarID() {
+        return carID;
+    }
+
+    /**
+     * Sets the car ID.
+     *
+     * @param carID the new car ID
+     */
+    public void setCarID(String carID) {
+        this.carID = carID;
+    }
+
+    /**
+     * Gets the brand.
+     *
+     * @return the brand
+     */
+    public String getBrand() {
+        return brand;
+    }
+
+    /**
+     * Sets the brand.
+     *
+     * @param brand the brand
+     */
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    /**
+     * Gets the type.
+     *
+     * @return the type
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * Sets the type.
+     *
+     * @param type the type
+     */
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    /**
+     * Gets the daily rental rate.
+     *
+     * @return the daily rate
+     */
+    public double getDailyRate() {
+        return dailyRate;
+    }
+
+    /**
+     * Sets the daily rental rate.
+     *
+     * @param dailyRate the daily rate
+     */
+    public void setDailyRate(double dailyRate) {
+        this.dailyRate = dailyRate;
+    }
+
+    /**
+     * Checks if the car is available.
+     *
+     * @return true if available, false otherwise
+     */
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    /**
+     * Sets the availability.
+     *
+     * @param isAvailable the availability flag
+     */
+    public void setAvailable(boolean isAvailable) {
+        this.isAvailable = isAvailable;
+    }
+
+    /**
+     * Gets the mapped features of the car.
+     *
+     * @return the features
+     */
+    public Features getFeatures() {
+        return features;
+    }
+
+    /**
+     * Sets the mapped features of the car.
+     *
+     * @param features the features
+     */
+    public void setFeatures(Features features) {
+        this.features = features;
+    }
+
+    /**
+     * Gets the insurance details.
+     *
+     * @return the insurance details
+     */
+    public InsuranceDetails getInsurance() {
+        return insurance;
+    }
+
+    /**
+     * Sets the insurance details.
+     *
+     * @param insurance the insurance details
+     */
+    public void setInsurance(InsuranceDetails insurance) {
+        this.insurance = insurance;
+    }
+
+    /**
+     * Returns a string representation of the car.
+     *
+     * @return the string representation
+     */
+    @Override
+    public String toString() {
+        return "Car{" +
+                "carID='" + carID + '\'' +
+                ", brand='" + brand + '\'' +
+                ", type='" + type + '\'' +
+                ", dailyRate=" + dailyRate +
+                ", isAvailable=" + isAvailable +
+                ", features=" + features +
+                ", insurance=" + insurance +
+                '}';
+    }
+}
+
+
+// =============== CarRentalImplementer.java ===============
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Main implementation of the Car Rental Management System (CRMS) interface.
+ * Handles the logic for initializing the system and managing the booking lifecycle.
+ */
+public class CarRentalImplementer implements CRMS {
+
+    /**
+     * Initializes the rental system with dummy data.
+     *
+     * @param numOfClients the number of dummy clients to create
+     * @param numOfCars    the number of dummy cars to create
+     * @param numOfAgents  the number of dummy agents to create
+     * @return an initialized RentalSystem object
+     */
+    @Override
+    public RentalSystem initializeRentalSystem(int numOfClients, int numOfCars, int numOfAgents) {
+        List<Client> clients = new ArrayList<>();
+        for (int i = 1; i <= numOfClients; i++) {
+            clients.add(new Client("C" + i, "Client " + i, "Contact " + i,
+                    "LIC" + i, "Address " + i, "Credit Card " + i, null, null));
+        }
+
+        List<Car> cars = new ArrayList<>();
+        for (int i = 1; i <= numOfCars; i++) {
+            cars.add(new Car("CAR" + i, "Brand " + i, "Sedan", 50.0 + (i * 10), true, null, null));
+        }
+
+        List<Agent> agents = new ArrayList<>();
+        for (int i = 1; i <= numOfAgents; i++) {
+            agents.add(new Agent("A" + i, "Agent " + i, "Agent Contact " + i,
+                    "AG" + i, "Main Branch", null, null));
+        }
+
+        return new RentalSystem(clients, cars, agents);
+    }
+
+    /**
+     * Creates an initial booking record from the provided client, car, and agent.
+     *
+     * @param c   the associated client
+     * @param car the associated car
+     * @param a   the associated agent
+     * @return a new BookingRecord
+     */
+    @Override
+    public BookingRecord book(Client c, Car car, Agent a) {
+        LocalDate startDate = LocalDate.now();
+        LocalDate endDate = startDate.plusDays(3);
+        double baseCost = (car != null ? car.getDailyRate() : 50.0) * 3;
+        
+        return new BookingRecord(c, car, a, startDate, endDate, baseCost);
+    }
+
+    /**
+     * Processes an existing booking record by applying dummy insurance and discounts.
+     *
+     * @param br the base booking record
+     * @return a ProcessedRecord
+     */
+    @Override
+    public ProcessedRecord process(BookingRecord br) {
+        if (br == null) return null;
+
+        InsuranceOption dummyInsurance = new InsuranceOption("Comprehensive", 15.0);
+        Discount dummyDiscount = new Discount("Standard Promo", 10.0, true);
+
+        return new ProcessedRecord(
+            br.getClient(), 
+            br.getCar(), 
+            br.getAgent(), 
+            br.getStartDate(), 
+            br.getEndDate(), 
+            br.getBaseCost(), 
+            dummyInsurance, 
+            dummyDiscount
+        );
+    }
+
+    /**
+     * Finalizes the processed record by determining payment details and pickup instructions.
+     *
+     * @param pr the processed record
+     * @return a FinalizedRecord
+     */
+    @Override
+    public FinalizedRecord finalize(ProcessedRecord pr) {
+        if (pr == null) return null;
+
+        double totalCost = pr.calculateUpdatedTotalCost();
+        double requiredDeposit = totalCost * 0.20; // 20% deposit
+
+        PaymentDetails paymentDetails = new PaymentDetails(requiredDeposit, totalCost, totalCost - requiredDeposit);
+        PickupDetails pickupDetails = new PickupDetails("Main Downtown Branch", pr.getStartDate(), "Please arrive 15 minutes early for inspection.");
+
+        return new FinalizedRecord(
+            pr.getClient(),
+            pr.getCar(),
+            pr.getAgent(),
+            pr.getStartDate(),
+            pr.getEndDate(),
+            pr.getBaseCost(),
+            pr.getInsuranceOption(),
+            pr.getDiscount(),
+            requiredDeposit,
+            paymentDetails,
+            pickupDetails
+        );
+    }
+}
+
+
+// =============== Client.java ===============
+
+/**
+ * Represents a client who rents a car, extending the abstract User model.
+ */
+public class Client extends User {
+    /** The client's license number as a basic string. */
+    private String licenseNumber;
+    /** The client's physical address. */
+    private String address;
+    /** The primary payment info details. */
+    private String paymentInfo;
+    /** The structured license details. */
+    private LicenseDetails license;
+    /** The structured contact details. */
+    private ContactDetails contact;
+
+    /**
+     * Constructs a new Client object.
+     *
+     * @param userID         the unique identifier
+     * @param name           the full name
+     * @param contactDetails the basic contact string
+     * @param licenseNumber  the client's license number string
+     * @param address        the client's address
+     * @param paymentInfo    the payment info
+     * @param license        the detailed license object
+     * @param contact        the detailed contact object
+     */
+    public Client(String userID, String name, String contactDetails, String licenseNumber, String address, String paymentInfo, LicenseDetails license, ContactDetails contact) {
+        super(userID, name, contactDetails);
+        this.licenseNumber = licenseNumber;
+        this.address = address;
+        this.paymentInfo = paymentInfo;
+        this.license = license;
+        this.contact = contact;
+    }
+
+    /**
+     * Gets the simple license number string.
+     *
+     * @return the license number
+     */
+    public String getLicenseNumber() {
+        return licenseNumber;
+    }
+
+    /**
+     * Sets the simple license number string.
+     *
+     * @param licenseNumber the license number
+     */
+    public void setLicenseNumber(String licenseNumber) {
+        this.licenseNumber = licenseNumber;
+    }
+
+    /**
+     * Gets the basic address string.
+     *
+     * @return the address
+     */
+    public String getAddress() {
+        return address;
+    }
+
+    /**
+     * Sets the basic address string.
+     *
+     * @param address the address
+     */
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    /**
+     * Gets the payment info string.
+     *
+     * @return the payment info
+     */
+    public String getPaymentInfo() {
+        return paymentInfo;
+    }
+
+    /**
+     * Sets the payment info string.
+     *
+     * @param paymentInfo the payment info
+     */
+    public void setPaymentInfo(String paymentInfo) {
+        this.paymentInfo = paymentInfo;
+    }
+
+    /**
+     * Gets the detailed license object.
+     *
+     * @return the detailed license
+     */
+    public LicenseDetails getLicense() {
+        return license;
+    }
+
+    /**
+     * Sets the detailed license object.
+     *
+     * @param license the detailed license
+     */
+    public void setLicense(LicenseDetails license) {
+        this.license = license;
+    }
+
+    /**
+     * Gets the detailed contact object.
+     *
+     * @return the detailed contact
+     */
+    public ContactDetails getContact() {
+        return contact;
+    }
+
+    /**
+     * Sets the detailed contact object.
+     *
+     * @param contact the detailed contact
+     */
+    public void setContact(ContactDetails contact) {
+        this.contact = contact;
+    }
+
+    /**
+     * Returns a string representation of the client.
+     *
+     * @return the string representation
+     */
+    @Override
+    public String toString() {
+        return "Client{" +
+                "userID='" + getUserID() + '\'' +
+                ", name='" + getName() + '\'' +
+                ", contactDetails='" + getContactDetails() + '\'' +
+                ", licenseNumber='" + licenseNumber + '\'' +
+                ", address='" + address + '\'' +
+                ", paymentInfo='" + paymentInfo + '\'' +
+                ", license=" + license +
+                ", contact=" + contact +
+                '}';
+    }
+}
+
+
+// =============== ContactDetails.java ===============
+
+/**
+ * Represents detailed contact information.
+ */
+public class ContactDetails {
+    /** The physical address. */
+    private String address;
+    /** The phone number. */
+    private String phoneNumber;
+    /** The email address. */
+    private String email;
+
+    /**
+     * Constructs a new ContactDetails object.
+     *
+     * @param address     the physical address
+     * @param phoneNumber the phone number
+     * @param email       the email address
+     */
+    public ContactDetails(String address, String phoneNumber, String email) {
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
+
+    /**
+     * Gets the address.
+     *
+     * @return the address
+     */
+    public String getAddress() {
+        return address;
+    }
+
+    /**
+     * Sets the address.
+     *
+     * @param address the address
+     */
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    /**
+     * Gets the phone number.
+     *
+     * @return the phone number
+     */
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    /**
+     * Sets the phone number.
+     *
+     * @param phoneNumber the phone number
+     */
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    /**
+     * Gets the email address.
+     *
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * Sets the email address.
+     *
+     * @param email the email
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * Returns a string representation of the contact details.
+     *
+     * @return the string representation
+     */
+    @Override
+    public String toString() {
+        return "ContactDetails{" +
+                "address='" + address + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
+}
+
+
+// =============== CRMS.java ===============
+
+/**
+ * Interface for the Car Rental Management System (CRMS).
+ * Defines the main methods needed for managing the car booking, processing, and finalization phases.
+ */
+public interface CRMS {
+    /**
+     * Sets up the rental environment.
+     *
+     * @param numOfClients the number of clients
+     * @param numOfCars    the number of cars
+     * @param numOfAgents  the number of agents
+     * @return an initialized RentalSystem
+     */
+    public RentalSystem initializeRentalSystem(int numOfClients, int numOfCars, int numOfAgents);
+
+    /**
+     * Handles the initial booking process.
+     *
+     * @param c   the client making the booking
+     * @param car the car being requested
+     * @param a   the agent handling the contract
+     * @return a booking record connecting these three parties
+     */
+    public BookingRecord book(Client c, Car car, Agent a);
+
+    /**
+     * Represents the processing phase of the booking.
+     *
+     * @param br the initial booking record
+     * @return a processed record with applied insurance and discounts
+     */
+    public ProcessedRecord process(BookingRecord br);
+
+    /**
+     * Finalizes the rental process.
+     *
+     * @param pr the processed booking record
+     * @return a finalized record confirming payment and pickup details
+     */
+    public FinalizedRecord finalize(ProcessedRecord pr);
+}
+
+
+// =============== Discount.java ===============
+
+/**
+ * Documents any discounts applied to a booking.
+ * Specifies the discount type and the amount (or percentage) to be deducted.
+ */
+public class Discount {
+    /** The type of discount (e.g., loyalty, promotional, corporate). */
+    private String type;
+    /** The numeric value of the discount. */
+    private double amount;
+    /** Indicates whether the amount represents a percentage or a flat value. */
+    private boolean isPercentage;
+
+    /**
+     * Constructs a new Discount.
+     *
+     * @param type         the discount type
+     * @param amount       the discount amount or percentage
+     * @param isPercentage true if the amount is a percentage, false if flat value
+     */
+    public Discount(String type, double amount, boolean isPercentage) {
+        this.type = type;
+        this.amount = amount;
+        this.isPercentage = isPercentage;
+    }
+
+    /**
+     * Gets the discount type.
+     *
+     * @return the type
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * Sets the discount type.
+     *
+     * @param type the new type
+     */
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    /**
+     * Gets the numeric value of the discount.
+     *
+     * @return the amount
+     */
+    public double getAmount() {
+        return amount;
+    }
+
+    /**
+     * Sets the numeric value of the discount.
+     *
+     * @param amount the new amount
+     */
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    /**
+     * Checks if the discount is a percentage.
+     *
+     * @return true if percentage, false otherwise
+     */
+    public boolean isPercentage() {
+        return isPercentage;
+    }
+
+    /**
+     * Sets whether the discount is a percentage.
+     *
+     * @param percentage true if percentage, false otherwise
+     */
+    public void setPercentage(boolean percentage) {
+        isPercentage = percentage;
+    }
+
+    /**
+     * Returns a string representation of the discount.
+     *
+     * @return the string representation
+     */
+    @Override
+    public String toString() {
+        String amountStr = isPercentage ? amount + "%" : "$" + String.format("%.2f", amount);
+        return "Discount {" +
+                "Type='" + type + '\'' +
+                ", Value=" + amountStr +
+                '}';
+    }
+}
+
+
+// =============== Features.java ===============
+
+/**
+ * Represents the specific features of a car.
+ */
+public class Features {
+    /** The fuel type of the vehicle (e.g., Petrol, Diesel, Electric). */
+    private String fuelType;
+    /** The transmission type (e.g., Manual, Automatic). */
+    private String transmission;
+    /** The seating capacity of the vehicle. */
+    private int seatingCapacity;
+    /** The category of the vehicle (e.g., SUV, Sedan, Luxury, Economy). */
+    private String category;
+
+    /**
+     * Constructs a new set of car features.
+     *
+     * @param fuelType        the fuel type
+     * @param transmission    the transmission type
+     * @param seatingCapacity the seating capacity
+     * @param category        the vehicle category
+     */
+    public Features(String fuelType, String transmission, int seatingCapacity, String category) {
+        this.fuelType = fuelType;
+        this.transmission = transmission;
+        this.seatingCapacity = seatingCapacity;
+        this.category = category;
+    }
+
+    /**
+     * Gets the fuel type.
+     *
+     * @return the fuel type
+     */
+    public String getFuelType() {
+        return fuelType;
+    }
+
+    /**
+     * Sets the fuel type.
+     *
+     * @param fuelType the fuel type
+     */
+    public void setFuelType(String fuelType) {
+        this.fuelType = fuelType;
+    }
+
+    /**
+     * Gets the transmission type.
+     *
+     * @return the transmission type
+     */
+    public String getTransmission() {
+        return transmission;
+    }
+
+    /**
+     * Sets the transmission type.
+     *
+     * @param transmission the transmission type
+     */
+    public void setTransmission(String transmission) {
+        this.transmission = transmission;
+    }
+
+    /**
+     * Gets the seating capacity.
+     *
+     * @return the seating capacity
+     */
+    public int getSeatingCapacity() {
+        return seatingCapacity;
+    }
+
+    /**
+     * Sets the seating capacity.
+     *
+     * @param seatingCapacity the seating capacity
+     */
+    public void setSeatingCapacity(int seatingCapacity) {
+        this.seatingCapacity = seatingCapacity;
+    }
+
+    /**
+     * Gets the category.
+     *
+     * @return the category
+     */
+    public String getCategory() {
+        return category;
+    }
+
+    /**
+     * Sets the category.
+     *
+     * @param category the category
+     */
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    /**
+     * Returns a string representation of the features.
+     *
+     * @return the string representation
+     */
+    @Override
+    public String toString() {
+        return "Features{" +
+                "fuelType='" + fuelType + '\'' +
+                ", transmission='" + transmission + '\'' +
+                ", seatingCapacity=" + seatingCapacity +
+                ", category='" + category + '\'' +
+                '}';
+    }
+}
+
+
+// =============== FinalizedRecord.java ===============
+
+import java.time.LocalDate;
+
+/**
+ * Represents a fully finalized booking record, incorporating payment and pickup details.
+ */
+public class FinalizedRecord extends ProcessedRecord {
+    /** The validated payment details. */
+    private PaymentDetails paymentDetails;
+    /** The designated pickup details. */
+    private PickupDetails pickupDetails;
+    /** The required deposit. */
+    private double depositRequired;
+
+    /**
+     * Constructs a new FinalizedRecord.
+     *
+     * @param client          the specific client
+     * @param car             the chosen car
+     * @param agent           the assigned agent
+     * @param startDate       the chosen start date
+     * @param endDate         the end date
+     * @param baseCost        the calculated base cost
+     * @param insuranceOption the requested insurance options
+     * @param discount        the requested overall discount
+     * @param depositRequired the specific deposit required
+     * @param paymentDetails  the payment details structured object
+     * @param pickupDetails   the pickup parameters
+     */
+    public FinalizedRecord(Client client, Car car, Agent agent, LocalDate startDate, LocalDate endDate, double baseCost,
+                           InsuranceOption insuranceOption, Discount discount, double depositRequired,
+                           PaymentDetails paymentDetails, PickupDetails pickupDetails) {
+        super(client, car, agent, startDate, endDate, baseCost, insuranceOption, discount);
+        this.depositRequired = depositRequired;
+        this.paymentDetails = paymentDetails;
+        this.pickupDetails = pickupDetails;
+    }
+
+    /**
+     * Gets the payment details.
+     *
+     * @return the payment details
+     */
+    public PaymentDetails getPaymentDetails() {
+        return paymentDetails;
+    }
+
+    /**
+     * Sets the payment details.
+     *
+     * @param paymentDetails the structured payment details
+     */
+    public void setPaymentDetails(PaymentDetails paymentDetails) {
+        this.paymentDetails = paymentDetails;
+    }
+
+    /**
+     * Gets the pickup details.
+     *
+     * @return the pickup details
+     */
+    public PickupDetails getPickupDetails() {
+        return pickupDetails;
+    }
+
+    /**
+     * Sets the pickup details.
+     *
+     * @param pickupDetails the pickup details
+     */
+    public void setPickupDetails(PickupDetails pickupDetails) {
+        this.pickupDetails = pickupDetails;
+    }
+
+    /**
+     * Gets the required deposit.
+     *
+     * @return the required deposit
+     */
+    public double getDepositRequired() {
+        return depositRequired;
+    }
+
+    /**
+     * Sets the required deposit.
+     *
+     * @param depositRequired the required deposit
+     */
+    public void setDepositRequired(double depositRequired) {
+        this.depositRequired = depositRequired;
+    }
+
+    /**
+     * Returns a string representation of the finalized record.
+     *
+     * @return the string representation
+     */
+    @Override
+    public String toString() {
+        return "FinalizedRecord{" +
+                "client=" + getClient() +
+                ", car=" + getCar() +
+                ", agent=" + getAgent() +
+                ", startDate=" + getStartDate() +
+                ", endDate=" + getEndDate() +
+                ", baseCost=" + getBaseCost() +
+                ", insuranceOption=" + getInsuranceOption() +
+                ", discount=" + getDiscount() +
+                ", depositRequired=" + depositRequired +
+                ", paymentDetails=" + paymentDetails +
+                ", pickupDetails=" + pickupDetails +
+                '}';
+    }
+}
+
+
+// =============== InsuranceDetails.java ===============
+
+/**
+ * Represents standard insurance details applicable to a rental car.
+ */
+public class InsuranceDetails {
+    /** The insurance provider name. */
+    private String provider;
+    /** The base coverage option (e.g., comprehensive, third-party). */
+    private String coverageOption;
+    /** Any additional add-ons included (e.g., premium cover, accident protection). */
+    private String addOns;
+
+    /**
+     * Constructs new InsuranceDetails.
+     *
+     * @param provider       the insurance provider
+     * @param coverageOption the coverage option
+     * @param addOns         the specific add-ons
+     */
+    public InsuranceDetails(String provider, String coverageOption, String addOns) {
+        this.provider = provider;
+        this.coverageOption = coverageOption;
+        this.addOns = addOns;
+    }
+
+    /**
+     * Gets the insurance provider.
+     *
+     * @return the provider name
+     */
+    public String getProvider() {
+        return provider;
+    }
+
+    /**
+     * Sets the insurance provider.
+     *
+     * @param provider the provider name
+     */
+    public void setProvider(String provider) {
+        this.provider = provider;
+    }
+
+    /**
+     * Gets the base coverage option.
+     *
+     * @return the coverage option
+     */
+    public String getCoverageOption() {
+        return coverageOption;
+    }
+
+    /**
+     * Sets the base coverage option.
+     *
+     * @param coverageOption the coverage option
+     */
+    public void setCoverageOption(String coverageOption) {
+        this.coverageOption = coverageOption;
+    }
+
+    /**
+     * Gets the active add-ons.
+     *
+     * @return the add-ons
+     */
+    public String getAddOns() {
+        return addOns;
+    }
+
+    /**
+     * Sets the active add-ons.
+     *
+     * @param addOns the add-ons
+     */
+    public void setAddOns(String addOns) {
+        this.addOns = addOns;
+    }
+
+    /**
+     * Returns a string representation of the insurance details.
+     *
+     * @return the string representation
+     */
+    @Override
+    public String toString() {
+        return "InsuranceDetails{" +
+                "provider='" + provider + '\'' +
+                ", coverageOption='" + coverageOption + '\'' +
+                ", addOns='" + addOns + '\'' +
+                '}';
+    }
+}
+
+
+// =============== InsuranceOption.java ===============
+
+/**
+ * Represents the insurance applied to a booking.
+ * Details the type of insurance and its additional extra cost.
+ */
+public class InsuranceOption {
+    /** The type of insurance (e.g., standard, premium). */
+    private String type;
+    /** The extra cost incurred by this insurance option. */
+    private double extraCost;
+
+    /**
+     * Constructs a new InsuranceOption.
+     *
+     * @param type      the type of insurance
+     * @param extraCost the extra cost for this insurance
+     */
+    public InsuranceOption(String type, double extraCost) {
+        this.type = type;
+        this.extraCost = extraCost;
+    }
+
+    /**
+     * Gets the type of insurance.
+     *
+     * @return the type
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * Sets the type of insurance.
+     *
+     * @param type the new type
+     */
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    /**
+     * Gets the extra cost for the insurance.
+     *
+     * @return the extra cost
+     */
+    public double getExtraCost() {
+        return extraCost;
+    }
+
+    /**
+     * Sets the extra cost for the insurance.
+     *
+     * @param extraCost the new extra cost
+     */
+    public void setExtraCost(double extraCost) {
+        this.extraCost = extraCost;
+    }
+
+    /**
+     * Returns a string representation of the insurance option.
+     *
+     * @return the string representation
+     */
+    @Override
+    public String toString() {
+        return "InsuranceOption {" +
+                "Type='" + type + '\'' +
+                ", ExtraCost=$" + String.format("%.2f", extraCost) +
+                '}';
+    }
+}
+
+
+// =============== LicenseDetails.java ===============
+
+/**
+ * Represents the license details of a driver.
+ */
+public class LicenseDetails {
+    /** The driver's license number. */
+    private String licenseNumber;
+    /** The validity period of the license. */
+    private String validityPeriod;
+    /** Any restrictions on the license. */
+    private String restrictions;
+
+    /**
+     * Constructs new LicenseDetails.
+     *
+     * @param licenseNumber  the license number
+     * @param validityPeriod the validity period
+     * @param restrictions   any restrictions on the license
+     */
+    public LicenseDetails(String licenseNumber, String validityPeriod, String restrictions) {
+        this.licenseNumber = licenseNumber;
+        this.validityPeriod = validityPeriod;
+        this.restrictions = restrictions;
+    }
+
+    /**
+     * Gets the license number.
+     *
+     * @return the license number
+     */
+    public String getLicenseNumber() {
+        return licenseNumber;
+    }
+
+    /**
+     * Sets the license number.
+     *
+     * @param licenseNumber the license number
+     */
+    public void setLicenseNumber(String licenseNumber) {
+        this.licenseNumber = licenseNumber;
+    }
+
+    /**
+     * Gets the validity period.
+     *
+     * @return the validity period
+     */
+    public String getValidityPeriod() {
+        return validityPeriod;
+    }
+
+    /**
+     * Sets the validity period.
+     *
+     * @param validityPeriod the validity period
+     */
+    public void setValidityPeriod(String validityPeriod) {
+        this.validityPeriod = validityPeriod;
+    }
+
+    /**
+     * Gets the license restrictions.
+     *
+     * @return the restrictions
+     */
+    public String getRestrictions() {
+        return restrictions;
+    }
+
+    /**
+     * Sets the license restrictions.
+     *
+     * @param restrictions the restrictions
+     */
+    public void setRestrictions(String restrictions) {
+        this.restrictions = restrictions;
+    }
+
+    /**
+     * Returns a string representation of the license details.
+     *
+     * @return the string representation
+     */
+    @Override
+    public String toString() {
+        return "LicenseDetails{" +
+                "licenseNumber='" + licenseNumber + '\'' +
+                ", validityPeriod='" + validityPeriod + '\'' +
+                ", restrictions='" + restrictions + '\'' +
+                '}';
+    }
+}
+
+
+// =============== PaymentDetails.java ===============
+
+/**
+ * Represents the structured payment details for a finalized booking.
+ */
+public class PaymentDetails {
+    /** The expected or paid deposit amount. */
+    private double depositAmount;
+    /** The total cost of the rental including all fees and discounts. */
+    private double totalRentalCost;
+    /** The outstanding balance left to be paid. */
+    private double outstandingBalance;
+
+    /**
+     * Constructs a new set of PaymentDetails.
+     *
+     * @param depositAmount      the deposit amount
+     * @param totalRentalCost    the total overall cost
+     * @param outstandingBalance the outstanding balance
+     */
+    public PaymentDetails(double depositAmount, double totalRentalCost, double outstandingBalance) {
+        this.depositAmount = depositAmount;
+        this.totalRentalCost = totalRentalCost;
+        this.outstandingBalance = outstandingBalance;
+    }
+
+    /**
+     * Gets the deposit amount.
+     *
+     * @return the deposit amount
+     */
+    public double getDepositAmount() {
+        return depositAmount;
+    }
+
+    /**
+     * Sets the deposit amount.
+     *
+     * @param depositAmount the deposit amount
+     */
+    public void setDepositAmount(double depositAmount) {
+        this.depositAmount = depositAmount;
+    }
+
+    /**
+     * Gets the total rental cost.
+     *
+     * @return the total cost
+     */
+    public double getTotalRentalCost() {
+        return totalRentalCost;
+    }
+
+    /**
+     * Sets the total rental cost.
+     *
+     * @param totalRentalCost the total cost
+     */
+    public void setTotalRentalCost(double totalRentalCost) {
+        this.totalRentalCost = totalRentalCost;
+    }
+
+    /**
+     * Gets the outstanding balance.
+     *
+     * @return the outstanding balance
+     */
+    public double getOutstandingBalance() {
+        return outstandingBalance;
+    }
+
+    /**
+     * Sets the outstanding balance.
+     *
+     * @param outstandingBalance the outstanding balance
+     */
+    public void setOutstandingBalance(double outstandingBalance) {
+        this.outstandingBalance = outstandingBalance;
+    }
+
+    /**
+     * Returns a string representation of the payment details.
+     *
+     * @return the string representation
+     */
+    @Override
+    public String toString() {
+        return "PaymentDetails{" +
+                "depositAmount=" + depositAmount +
+                ", totalRentalCost=" + totalRentalCost +
+                ", outstandingBalance=" + outstandingBalance +
+                '}';
+    }
+}
+
+
+// =============== PickupDetails.java ===============
+
+import java.time.LocalDate;
+
+/**
+ * Represents details regarding car pickup by the client.
+ */
+public class PickupDetails {
+    /** The standard branch location where pickup occurs. */
+    private String pickupBranch;
+    /** The designated date of the pickup. */
+    private LocalDate pickupDate;
+    /** Any special instructions or preferences for pickup. */
+    private String specialInstructions;
+
+    /**
+     * Constructs a new set of PickupDetails.
+     *
+     * @param pickupBranch        the designated pickup branch
+     * @param pickupDate          the designated pickup date
+     * @param specialInstructions the special instructions
+     */
+    public PickupDetails(String pickupBranch, LocalDate pickupDate, String specialInstructions) {
+        this.pickupBranch = pickupBranch;
+        this.pickupDate = pickupDate;
+        this.specialInstructions = specialInstructions;
+    }
+
+    /**
+     * Gets the pickup branch.
+     *
+     * @return the pickup branch
+     */
+    public String getPickupBranch() {
+        return pickupBranch;
+    }
+
+    /**
+     * Sets the pickup branch.
+     *
+     * @param pickupBranch the pickup branch
+     */
+    public void setPickupBranch(String pickupBranch) {
+        this.pickupBranch = pickupBranch;
+    }
+
+    /**
+     * Gets the pickup date.
+     *
+     * @return the pickup date
+     */
+    public LocalDate getPickupDate() {
+        return pickupDate;
+    }
+
+    /**
+     * Sets the pickup date.
+     *
+     * @param pickupDate the pickup date
+     */
+    public void setPickupDate(LocalDate pickupDate) {
+        this.pickupDate = pickupDate;
+    }
+
+    /**
+     * Gets any special instructions.
+     *
+     * @return the special instructions
+     */
+    public String getSpecialInstructions() {
+        return specialInstructions;
+    }
+
+    /**
+     * Sets any special instructions.
+     *
+     * @param specialInstructions the special instructions
+     */
+    public void setSpecialInstructions(String specialInstructions) {
+        this.specialInstructions = specialInstructions;
+    }
+
+    /**
+     * Returns a string representation of the pickup details.
+     *
+     * @return the string representation
+     */
+    @Override
+    public String toString() {
+        return "PickupDetails{" +
+                "pickupBranch='" + pickupBranch + '\'' +
+                ", pickupDate=" + pickupDate +
+                ", specialInstructions='" + specialInstructions + '\'' +
+                '}';
+    }
+}
+
+
+// =============== ProcessedRecord.java ===============
+
+import java.time.LocalDate;
+
+/**
+ * Represents a processed booking record that strictly extends the base BookingRecord.
+ * Includes additional processing details like insurance and discount,
+ * and calculates the updated final total cost.
+ */
+public class ProcessedRecord extends BookingRecord {
+    /** The specific insurance option chosen for this booking. */
+    private InsuranceOption insuranceOption;
+    /** The specific discount applied to this booking. */
+    private Discount discount;
+
+    /**
+     * Constructs a new ProcessedRecord using the parent class constructor and additional details.
+     *
+     * @param client          the booking client
+     * @param car             the requested car
+     * @param agent           the managing agent
+     * @param startDate       the start date of the rental
+     * @param endDate         the end date of the rental
+     * @param baseCost        the base rental cost
+     * @param insuranceOption the chosen insurance option
+     * @param discount        the applied discount
+     */
+    public ProcessedRecord(Client client, Car car, Agent agent, LocalDate startDate, LocalDate endDate, double baseCost,
+                           InsuranceOption insuranceOption, Discount discount) {
+        super(client, car, agent, startDate, endDate, baseCost);
+        this.insuranceOption = insuranceOption;
+        this.discount = discount;
+    }
+
+    /**
+     * Gets the chosen insurance option.
+     *
+     * @return the insurance option
+     */
+    public InsuranceOption getInsuranceOption() {
+        return insuranceOption;
+    }
+
+    /**
+     * Sets the chosen insurance option.
+     *
+     * @param insuranceOption the new insurance option
+     */
+    public void setInsuranceOption(InsuranceOption insuranceOption) {
+        this.insuranceOption = insuranceOption;
+    }
+
+    /**
+     * Gets the applied discount.
+     *
+     * @return the discount
+     */
+    public Discount getDiscount() {
+        return discount;
+    }
+
+    /**
+     * Sets the applied discount.
+     *
+     * @param discount the new discount
+     */
+    public void setDiscount(Discount discount) {
+        this.discount = discount;
+    }
+
+    /**
+     * Calculates the updated total cost for the rental.
+     * The formula applies base cost plus insurance cost, minus the discount.
+     *
+     * @return the updated total calculated cost
+     */
+    public double calculateUpdatedTotalCost() {
+        double costBeforeDiscount = getBaseCost();
+        
+        if (insuranceOption != null) {
+            costBeforeDiscount += insuranceOption.getExtraCost();
+        }
+
+        double discountValue = 0.0;
+        if (discount != null) {
+            if (discount.isPercentage()) {
+                // E.g., a 10% discount on $100 -> $10 deduction
+                discountValue = costBeforeDiscount * (discount.getAmount() / 100.0);
+            } else {
+                // Flat amount deduction
+                discountValue = discount.getAmount();
+            }
+        }
+
+        return costBeforeDiscount - discountValue;
+    }
+
+    /**
+     * Returns an overridden string representation of the processed record.
+     *
+     * @return the string representation
+     */
+    @Override
+    public String toString() {
+        return "ProcessedRecord {" +
+                "BookingDetails=" + super.toString() +
+                ", InsuranceOption=" + (insuranceOption != null ? insuranceOption.toString() : "None") +
+                ", Discount=" + (discount != null ? discount.toString() : "None") +
+                ", UpdatedTotalCost=$" + String.format("%.2f", calculateUpdatedTotalCost()) +
+                '}';
+    }
+}
+
+
+// =============== RentalSystem.java ===============
+
+import java.util.List;
+import java.util.ArrayList;
+
+/**
+ * Main container class representing the Rental System's data models.
+ */
+public class RentalSystem {
+    /** The active list of clients in the system. */
+    private List<Client> clients;
+    /** The active list of cars in the system. */
+    private List<Car> cars;
+    /** The active list of agents in the system. */
+    private List<Agent> agents;
+
+    /**
+     * Constructs a new RentalSystem with initial lists.
+     *
+     * @param clients the initial list of clients
+     * @param cars    the initial list of cars
+     * @param agents  the initial list of agents
+     */
+    public RentalSystem(List<Client> clients, List<Car> cars, List<Agent> agents) {
+        this.clients = clients != null ? clients : new ArrayList<>();
+        this.cars = cars != null ? cars : new ArrayList<>();
+        this.agents = agents != null ? agents : new ArrayList<>();
+    }
+
+    /**
+     * Gets the list of clients.
+     *
+     * @return the clients list
+     */
+    public List<Client> getClients() {
+        return clients;
+    }
+
+    /**
+     * Sets the list of clients.
+     *
+     * @param clients the new clients list
+     */
+    public void setClients(List<Client> clients) {
+        this.clients = clients;
+    }
+
+    /**
+     * Gets the list of cars.
+     *
+     * @return the cars list
+     */
+    public List<Car> getCars() {
+        return cars;
+    }
+
+    /**
+     * Sets the list of cars.
+     *
+     * @param cars the new cars list
+     */
+    public void setCars(List<Car> cars) {
+        this.cars = cars;
+    }
+
+    /**
+     * Gets the list of agents.
+     *
+     * @return the agents list
+     */
+    public List<Agent> getAgents() {
+        return agents;
+    }
+
+    /**
+     * Sets the list of agents.
+     *
+     * @param agents the new agents list
+     */
+    public void setAgents(List<Agent> agents) {
+        this.agents = agents;
+    }
+
+    /**
+     * Returns a string representation of the rental system.
+     *
+     * @return the string representation
+     */
+    @Override
+    public String toString() {
+        return "RentalSystem{" +
+                "clientsCount=" + (clients != null ? clients.size() : 0) +
+                ", carsCount=" + (cars != null ? cars.size() : 0) +
+                ", agentsCount=" + (agents != null ? agents.size() : 0) +
+                '}';
+    }
+}
+
+
+// =============== Schedule.java ===============
+
+/**
+ * Represents an agent's working schedule.
+ */
+public class Schedule {
+    /** The standard working hours (e.g., "09:00-17:00"). */
+    private String workingHours;
+    /** Indicates whether the agent is currently available. */
+    private boolean availability;
+    /** The specific days off for the agent (e.g., "Saturday, Sunday"). */
+    private String daysOff;
+
+    /**
+     * Constructs a new Schedule.
+     *
+     * @param workingHours the working hours
+     * @param availability the current availability status
+     * @param daysOff      the days off
+     */
+    public Schedule(String workingHours, boolean availability, String daysOff) {
+        this.workingHours = workingHours;
+        this.availability = availability;
+        this.daysOff = daysOff;
+    }
+
+    /**
+     * Gets the working hours.
+     *
+     * @return the working hours
+     */
+    public String getWorkingHours() {
+        return workingHours;
+    }
+
+    /**
+     * Sets the working hours.
+     *
+     * @param workingHours the working hours
+     */
+    public void setWorkingHours(String workingHours) {
+        this.workingHours = workingHours;
+    }
+
+    /**
+     * Checks availability.
+     *
+     * @return true if available, false otherwise
+     */
+    public boolean isAvailability() {
+        return availability;
+    }
+
+    /**
+     * Sets availability.
+     *
+     * @param availability the availability flag
+     */
+    public void setAvailability(boolean availability) {
+        this.availability = availability;
+    }
+
+    /**
+     * Gets the days off.
+     *
+     * @return the days off
+     */
+    public String getDaysOff() {
+        return daysOff;
+    }
+
+    /**
+     * Sets the days off.
+     *
+     * @param daysOff the days off
+     */
+    public void setDaysOff(String daysOff) {
+        this.daysOff = daysOff;
+    }
+
+    /**
+     * Returns a string representation of the schedule.
+     *
+     * @return the string representation
+     */
+    @Override
+    public String toString() {
+        return "Schedule{" +
+                "workingHours='" + workingHours + '\'' +
+                ", availability=" + availability +
+                ", daysOff='" + daysOff + '\'' +
+                '}';
+    }
+}
+
+
+// =============== TestRental.java ===============
+
+/**
+ * Test class to verify the CarRentalImplementer and demonstrate the CRMS workflow.
+ * Fulfils Task 3 of the CW3 â€“ Part 2 Specification.
+ */
+public class TestRental {
+    public static void main(String[] args) {
+        System.out.println("--- Starting CRMS Test ---");
+        
+        // Step 1: Initialize the rental system with ONE client, TWO agents, and ONE car
+        CarRentalImplementer crms = new CarRentalImplementer();
+        RentalSystem system = crms.initializeRentalSystem(1, 1, 2);
+        
+        Client client = system.getClients().get(0);
+        Car car = system.getCars().get(0);
+        Agent agent1 = system.getAgents().get(0);
+        Agent agent2 = system.getAgents().get(1);
+        
+        System.out.println("System initialized with: ");
+        System.out.println(client);
+        System.out.println(car);
+        System.out.println(agent1);
+        System.out.println(agent2);
+        System.out.println("\n------------------------------------------------\n");
+
+        // Step 2: Create TWO booking records for the same client and car, each handled by a different agent
+        BookingRecord booking1 = crms.book(client, car, agent1);
+        BookingRecord booking2 = crms.book(client, car, agent2);
+        
+        System.out.println("Created Booking 1 handled by " + agent1.getName());
+        System.out.println("Created Booking 2 handled by " + agent2.getName());
+        
+        // Step 3: Process the two booking records, applying different insurance or discount terms
+        ProcessedRecord processed1 = crms.process(booking1);
+        ProcessedRecord processed2 = crms.process(booking2);
+        
+        // Changing the dummy processing applied by process() to differentiate them
+        processed1.setInsuranceOption(new InsuranceOption("Basic", 10.0));
+        processed1.setDiscount(new Discount("None", 0, false)); // No discount
+        
+        processed2.setInsuranceOption(new InsuranceOption("Premium", 25.0));
+        processed2.setDiscount(new Discount("Loyalty Promo", 20.0, true)); // 20% discount
+        
+        System.out.println("\nProcessed Booking 1:");
+        System.out.println(processed1);
+        System.out.println("\nProcessed Booking 2:");
+        System.out.println(processed2);
+
+        // Step 4: Compare the total costs of the two processed records
+        double cost1 = processed1.calculateUpdatedTotalCost();
+        double cost2 = processed2.calculateUpdatedTotalCost();
+        
+        System.out.println("\nCost Comparison:");
+        System.out.println("Agent 1 Contract Cost: $" + String.format("%.2f", cost1));
+        System.out.println("Agent 2 Contract Cost: $" + String.format("%.2f", cost2));
+        
+        // Step 5: Finalize the booking that offers the better deal to the client
+        ProcessedRecord betterDeal = (cost1 <= cost2) ? processed1 : processed2;
+        System.out.println("\nChoosing the better deal (Agent " + ((cost1 <= cost2) ? "1" : "2") + ")...");
+        
+        FinalizedRecord finalRecord = crms.finalize(betterDeal);
+        System.out.println("\n--- Finalized Rental Agreement ---");
+        System.out.println(finalRecord);
+    }
+}
+
+
+// =============== User.java ===============
+
+/**
+ * Represents an abstract basic user in the system.
+ */
+public abstract class User {
+    /** The unique identifier for the user. */
+    private String userID;
+    /** The full name of the user. */
+    private String name;
+    /** The contact details of the user. */
+    private String contactDetails;
+
+    /**
+     * Constructs a new User.
+     *
+     * @param userID         the unique identifier
+     * @param name           the full name
+     * @param contactDetails the contact details string
+     */
+    public User(String userID, String name, String contactDetails) {
+        this.userID = userID;
+        this.name = name;
+        this.contactDetails = contactDetails;
+    }
+
+    /**
+     * Gets the user ID.
+     *
+     * @return the user ID
+     */
+    public String getUserID() {
+        return userID;
+    }
+
+    /**
+     * Sets the user ID.
+     *
+     * @param userID the user ID
+     */
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    /**
+     * Gets the user name.
+     *
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Sets the user name.
+     *
+     * @param name the name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Gets the contact details string.
+     *
+     * @return the contact details string
+     */
+    public String getContactDetails() {
+        return contactDetails;
+    }
+
+    /**
+     * Sets the contact details string.
+     *
+     * @param contactDetails the contact details string
+     */
+    public void setContactDetails(String contactDetails) {
+        this.contactDetails = contactDetails;
+    }
+
+    /**
+     * Returns a string representation of the User.
+     *
+     * @return a string containing user details
+     */
+    @Override
+    public String toString() {
+        return "User{" +
+                "userID='" + userID + '\'' +
+                ", name='" + name + '\'' +
+                ", contactDetails='" + contactDetails + '\'' +
+                '}';
+    }
+}
+
+
